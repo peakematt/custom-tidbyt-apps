@@ -46,6 +46,12 @@ def main():
             f"/tmp/{app_id}.webp"
         ])
 
+        RunThis([
+            "rm",
+            "-f",
+            f"/tmp/{app_id}.webp"
+        ])
+
 
 if __name__ == '__main__':
     main()

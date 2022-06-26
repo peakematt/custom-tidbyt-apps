@@ -26,7 +26,14 @@ RUN \
     make build && \ 
     mv pixlet /usr/bin/pixlet && \ 
     chmod +x /usr/bin/pixlet && \
-    rm -rf /tmp/*
+    rm -rf /tmp/* && \
+    echo "**** Remove Unneeded Packages ****" && \
+    apt-get purge -y \
+    wget \ 
+    golang-go \
+    nodejs \
+    npm \
+    git
 
 COPY src/ /src
 

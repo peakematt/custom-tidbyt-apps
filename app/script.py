@@ -21,18 +21,17 @@ def RunThis(cmd: list) -> None:
 def main():
     src_path = pathlib.Path("/src")
     for file in src_path.rglob("*.star"):
+        app_id = file.name.split("-")[0]
         infile = open(file, 'r')
-        outfile = open(f"/tmp/{file.name}", 'w+')
+        outfile = open(f"/tmp/{app_id}.star", 'w+')
 
         for line in infile.read():
             outfile.write(sub_variables(line))
 
-        app_id = file.name.split("-")[0]
-
         RunThis([
             "pixlet",
             "render",
-            f"{str(file)}",
+            f"/tmp/{app_id}.star",
             "--output",
             f"/tmp/{app_id}.webp"
         ])
@@ -52,7 +51,8 @@ def main():
         RunThis([
             "rm",
             "-f",
-            f"/tmp/{app_id}.webp"
+            f"/tmp/{app_id}.webp",
+            f"/tmp/{app_id}.star"
         ])
 
 

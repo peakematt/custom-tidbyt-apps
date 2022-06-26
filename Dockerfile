@@ -4,7 +4,9 @@ ENV PYTHONBUFFERED=1
 
 RUN \
     echo "**** Install Packages ****" && \
-    apt-get update -y && apt-get install -y -qq \
+    ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && \ 
+    apt-get update -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y -qq \
     cron \
     wget \ 
     python3 \

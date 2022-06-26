@@ -13,6 +13,7 @@ RUN \
     python3-pip \
     golang-go \ 
     nodejs \ 
+    npm \ 
     libwebp-dev \ 
     git \ 
     && rm -rf /var/lib/apt/lists/* && \

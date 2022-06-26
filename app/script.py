@@ -25,8 +25,11 @@ def main():
         infile = open(file, 'r')
         outfile = open(f"/tmp/{app_id}.star", 'w+')
 
-        for line in infile.read():
+        for line in infile.readlines():
             outfile.write(sub_variables(line))
+
+        infile.close()
+        outfile.close()
 
         RunThis([
             "pixlet",
@@ -52,7 +55,7 @@ def main():
             "rm",
             "-f",
             f"/tmp/{app_id}.webp",
-            f"/tmp/{app_id}.star"
+            f"/tmp/{app_id}.star"j
         ])
 
 

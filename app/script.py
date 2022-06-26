@@ -21,10 +21,10 @@ def RunThis(cmd: list) -> None:
 def main():
     src_path = pathlib.Path("/src")
     for file in src_path.rglob("*.star"):
-        infile = open(file)
-        outfile = open(f"/tmp/{file.name}")
+        infile = open(file, 'r')
+        outfile = open(f"/tmp/{file.name}", 'w+')
 
-        for line in infile.readline():
+        for line in infile.read():
             outfile.write(sub_variables(line))
 
         app_id = file.name.split("-")[0]

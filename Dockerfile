@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-ENV PYTHONBUTTERED=1
+ENV PYTHONBUFFERED=1
 
 RUN \
     echo "**** Install Packages ****" && \
@@ -9,12 +9,21 @@ RUN \
     wget \ 
     python3 \
     python3-pip \
+    golang-go \ 
+    nodejs \ 
+    libwebp-dev \ 
+    git \ 
     && rm -rf /var/lib/apt/lists/* && \
     echo "**** Get Pixlet ****" && \
-    wget https://github.com/tidbyt/pixlet/releases/download/v0.17.9/pixlet_0.17.9_darwin_amd64.tar.gz -O /tmp/pixlet.tar.gz && \
-    tar -xf /tmp/pixlet.tar.gz -C /usr/bin && \
+    cd /tmp && \
+    git clone https://github.com/tidbyt/pixlet && \ 
+    cd pixlet && \
+    npm install && \
+    npm run build && \ 
+    make build && \ 
+    mv pixlet /usr/bin/pixlet && \ 
     chmod +x /usr/bin/pixlet && \
-    rm -rf /tmp/pixlet.tar.gz
+    rm -rf /tmp/*
 
 COPY src/ /src
 

@@ -39,10 +39,11 @@ RUN \
 COPY src/ /src
 
 COPY app/custom-cron /etc/cron.d/custom-cron
-
 COPY app/script.py /app/script.py
+COPY app/entrypoint.sh /app/entrypoint.sh
 
 RUN chmod 0744 /etc/cron.d/custom-cron && \
-    crontab /etc/cron.d/custom-cron
+    crontab /etc/cron.d/custom-cron && \
+    chmod 0744 /app/entrypoint.sh
 
-CMD ["cron", "-f"]
+ENTRYPOINT ["/app/entrypoint.sh"]

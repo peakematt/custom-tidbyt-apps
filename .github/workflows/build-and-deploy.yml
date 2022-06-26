@@ -26,4 +26,4 @@ jobs:
         password: ${{ secrets.ACTIONS_PAT }}
 
     - name: Push Container
-      run: docker push ghcr.io/${{ github.repository }}:${{ github.sha }}
+      run: docker push ghcr.io/${{ github.repository }}:latest

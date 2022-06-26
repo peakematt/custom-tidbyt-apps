@@ -37,45 +37,36 @@ uO+1/VkAAAAASUVORK5CYII=
 """)
 
 def main():
+    resp = http.get(LOCATION_STATUS_URL, auth=('ENVIRON_REPLACE_N8N_USER', 'ENVIRON_REPLACE_N8N_PASS'))
 
-    matt_cache = cache.get("matt_location")
-    anthony_cache = cache.get("anthony_location")
-
-    if matt_cache != None and anthony_cache != None:
-        anthony = anthony_cache
-        matt = matt_cache
-
-    else:
-        resp = http.get(LOCATION_STATUS_URL, auth=('ENVIRON_REPLACE_N8N_USER', 'ENVIRON_REPLACE_N8N_PASS'))
-
-        if resp.status_code != 200:
-            return render.Root(
-            child = render.Row(
-                children = [
-                    render.Column(children = [
-                        render.Padding(child=render.Text("Matt"), pad=(0,0,0,4)),
-                        render.Image(src=ERROR_ICON)
-                    ], cross_align = "center"),
-                    render.Box(width=1, height=32, color="#808080"),
-                    render.Column(children = [
-                        render.Padding(child=render.Text("Anth"), pad=(0,0,0,4)),
-                        render.Image(src=ERROR_ICON)
-                    ], cross_align = "center"),
-                ],
-                main_align = "space_evenly",
-                cross_align = "center",
-                expanded = True
-            )
+    if resp.status_code != 200:
+        return render.Root(
+        child = render.Row(
+            children = [
+                render.Column(children = [
+                    render.Padding(child=render.Text("Matt"), pad=(0,0,0,4)),
+                    render.Image(src=ERROR_ICON)
+                ], cross_align = "center"),
+                render.Box(width=1, height=32, color="#808080"),
+                render.Column(children = [
+                    render.Padding(child=render.Text("Anth"), pad=(0,0,0,4)),
+                    render.Image(src=ERROR_ICON)
+                ], cross_align = "center"),
+            ],
+            main_align = "space_evenly",
+            cross_align = "center",
+            expanded = True
         )
+    )
 
-        matt = resp.json()['MattLocation']
-        anthony = resp.json()['AnthonyLocation']
+    matt = resp.json()['MattLocation']
+    anthony = resp.json()['AnthonyLocation']
 
-        cache.set("matt_location", matt, ttl_seconds = 300)
-        cache.set("anthony_location", anthony, ttl_seconds = 300)
+    cache.set("matt_location", matt, ttl_seconds = 300)
+    cache.set("anthony_location", anthony, ttl_seconds = 300)
 
-        matt_icon = ""
-        anthony_icon = ""
+    matt_icon = ""
+    anthony_icon = ""
 
     if matt == 'home':
         matt_icon = HOME_ICON

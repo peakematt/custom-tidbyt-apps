@@ -4,7 +4,10 @@ import subprocess
 
 
 def sub_variables(inline: str) -> str:
+    inline = inline.replace("ENVIRON_REPLACE_N8N_USER", os.getenv("N8N_USER"))
     inline = inline.replace("ENVIRON_REPLACE_N8N_PASS", os.getenv("N8N_PASS"))
+    inline = inline.replace(
+        "ENVIRON_REPLACE_HOMEAWAY_WEBHOOK", os.getenv("HOMEAWAY_WEBHOOK"))
 
     return inline
 

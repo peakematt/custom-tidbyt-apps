@@ -3,7 +3,7 @@ load("http.star", "http")
 load("cache.star", "cache")
 load("encoding/base64.star", "base64")
 
-LOCATION_STATUS_URL = "https://n8n.sithis.house/webhook/7498ff63-d8cc-4645-9afd-35ae1b9914bd"
+LOCATION_STATUS_URL = "ENVIRON_REPLACE_HOMEAWAY_WEBHOOK"
 
 HOME_ICON = base64.decode("""
 iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBI
@@ -46,7 +46,7 @@ def main():
         matt = matt_cache
 
     else:
-        resp = http.get(LOCATION_STATUS_URL, auth=('tidbyt', 'ENVIRON_REPLACE_N8N_PASS'))
+        resp = http.get(LOCATION_STATUS_URL, auth=('ENVIRON_REPLACE_N8N_USER', 'ENVIRON_REPLACE_N8N_PASS'))
 
         if resp.status_code != 200:
             return render.Root(

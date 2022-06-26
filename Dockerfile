@@ -33,7 +33,8 @@ RUN \
     golang-go \
     nodejs \
     npm \
-    git
+    git && \
+    apt-get autoremove -y
 
 COPY src/ /src
 

@@ -55,7 +55,7 @@ def main():
             "rm",
             "-f",
             f"/tmp/{app_id}.webp",
-            f"/tmp/{app_id}.star"j
+            f"/tmp/{app_id}.star"
         ])
 
 

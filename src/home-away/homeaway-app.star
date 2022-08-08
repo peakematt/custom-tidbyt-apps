@@ -80,7 +80,7 @@ def main():
 
     if anthony == 'home':
         anthony_icon = HOME_ICON
-    elif anthony == "work":
+    elif anthony == "Anthony_Work" or anthony == "anthony_work":
         anthony_icon = WORK_ICON
     elif anthony == "away":
         anthony_icon == AWAY_ICON
